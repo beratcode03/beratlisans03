@@ -1,0 +1,128 @@
+appId: com.afyonlummm.yksanaliz
+productName: AFYONLUMMM
+executableName: AFYONLUMMM
+copyright: Copyright © 2025 AFYONLUMMM - Tüm hakları saklıdır.
+asar: true
+compression: maximum
+disableSanityCheckAsar: true
+npmRebuild: false
+buildDependenciesFromSource: false
+nodeGypRebuild: false
+removePackageScripts: true
+electronCompile: false
+
+extraMetadata:
+  main: electron/main.cjs
+
+directories:
+  output: dist-electron
+
+files:
+  - electron/main.cjs
+  - electron/preload.cjs
+  - electron/config-manager.cjs
+  - electron/config-encoder.cjs
+  - electron/self-destruct-preload.cjs
+  - electron/activity-logger.cjs
+  - electron/discord-webhook.cjs
+  - electron/encrypted-queue.cjs
+  - electron/ipc-auth.cjs
+  - electron/license-check.cjs
+  - electron/silent-logger.cjs
+  - electron/config-initial-values.enc
+  - electron/utils/**/*
+  - electron/icons/**/*
+  - electron/protected/**/*
+  - electron/loading.html
+  - electron/license-modal.html
+  - electron/license-expired-modal.html
+  - electron/name-input-modal.html
+  - dist/**/*
+  - package.json
+  - "!electron/monitoring.cjs"
+  - "!electron/config-initial-values.json"
+  - "!electron/protected/config-initial-values.json"
+  - "!dist/server.mjs"
+  - "!dist/server.js.backup"
+  - "!dist/**/*.map"
+  - "!**/*.map"
+  - "!**/*.md"
+  - "!**/LICENSE"
+  - "!**/README"
+  - "!node_modules/@esbuild/**/*"
+  - "!node_modules/@rollup/**/*"
+  - "!node_modules/better-sqlite3/**/*"
+  - "!node_modules/bindings/**/*"
+  - "!node_modules/prebuild-install/**/*"
+  - "!node_modules/node-gyp/**/*"
+  - "!node_modules/node-addon-api/**/*"
+  - "!node_modules/esbuild/**/*"
+  - "!node_modules/tsx/**/*"
+  - "!node_modules/typescript/**/*"
+  - "!node_modules/vite/**/*"
+  - "!node_modules/@vitejs/**/*"
+  - "!node_modules/drizzle-kit/**/*"
+  - "!node_modules/node-global-key-listener/**/*"
+  - "!server/**/*"
+  - "!data/**/*"
+
+asarUnpack:
+  - dist/server.jsc
+  - dist/server.cjs
+  - dist/server-loader.cjs
+  - dist/bytecode-meta.json
+  - dist/public/**/*
+  - electron/icons/**/*
+  - electron/*.enc
+  - electron/protected/*.enc
+  - electron/config-initial-values.enc
+  - electron/protected/config-initial-values.enc
+  - node_modules/bytenode/**/*
+
+# GUVENLIK: server.cjs ve server.cjs.backup ASAR ICINDE KALMALI
+# Kullanici bu dosyalara erisemeyecek!
+
+extraResources:
+  - from: client/public/ataturk.png
+    to: assets/ataturk.png
+  - from: client/public/ataturkimza.png
+    to: assets/ataturkimza.png
+  - from: client/public/turkbayragi.png
+    to: assets/turkbayragi.png
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: electron/icons/app-icon.ico
+  verifyUpdateCodeSignature: false
+  legalTrademarks: AFYONLUMMM YKS Analiz Takip Sistemi
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  runAfterFinish: true
+  installerIcon: electron/icons/app-icon.ico
+  uninstallerIcon: electron/icons/app-icon.ico
+  installerHeaderIcon: electron/icons/app-icon.ico
+  deleteAppDataOnUninstall: false
+  perMachine: false
+  allowElevation: true
+  displayLanguageSelector: false
+  menuCategory: AFYONLUMMM
+  shortcutName: AFYONLUMMM
+  artifactName: "${productName}-Kurulum-${version}.${ext}"
+  license: LICENSE.txt
+  warningsAsErrors: false
+  language: 1055
+  multiLanguageInstaller: false
+  differentialPackage: false
+
+publish:
+  provider: github
+  owner: beratcode03
+  repo: beratderstakip03
+  releaseType: release

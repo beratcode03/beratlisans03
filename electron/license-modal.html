@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisans Aktivasyonu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #16003b 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.8;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .titlebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            -webkit-app-region: drag;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .titlebar-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8b5cf6;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .titlebar-controls {
+            display: flex;
+            gap: 8px;
+            -webkit-app-region: no-drag;
+        }
+
+        .titlebar-button {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: none;
+            background: rgba(138, 43, 226, 0.1);
+            color: #9ca3af;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-size: 18px;
+            padding: 0;
+        }
+
+        .titlebar-button:hover {
+            background: rgba(138, 43, 226, 0.3);
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .titlebar-button.close:hover {
+            background: rgba(239, 68, 68, 0.8);
+            color: #ffffff;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            background: rgba(20, 10, 40, 0.95);
+            border: 2px solid rgba(138, 43, 226, 0.4);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 20px 60px rgba(138, 43, 226, 0.5), 
+                        0 0 100px rgba(138, 43, 226, 0.3),
+                        inset 0 0 60px rgba(138, 43, 226, 0.1);
+            max-width: 550px;
+            width: 90%;
+            backdrop-filter: blur(20px);
+            animation: slideIn 0.5s ease-out;
+            margin-top: 60px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.6),
+                        0 0 40px rgba(139, 92, 246, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 10px 30px rgba(139, 92, 246, 0.6),
+                            0 0 40px rgba(139, 92, 246, 0.4);
+            }
+            50% { 
+                transform: scale(1.05); 
+                box-shadow: 0 15px 45px rgba(139, 92, 246, 0.8),
+                            0 0 60px rgba(139, 92, 246, 0.6);
+            }
+        }
+
+        .logo-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+        }
+
+        .subtitle {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .timer-container {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.4);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+        }
+
+        .timer-label {
+            color: #fca5a5;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timer-display {
+            font-size: 36px;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            color: #ef4444;
+            text-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+            animation: timerPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes timerPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .timer-warning {
+            color: #fbbf24;
+            font-size: 11px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            color: #a78bfa;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 15px;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        input::placeholder {
+            color: #6b7280;
+            letter-spacing: 1px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.5),
+                        0 0 40px rgba(139, 92, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.7),
+                        0 0 60px rgba(139, 92, 246, 0.5);
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+        }
+
+        .btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover:not(:disabled)::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #fca5a5;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            display: none;
+            animation: shake 0.5s;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        .attempts {
+            text-align: center;
+            margin-top: 16px;
+            color: #fbbf24;
+            font-size: 13px;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+        }
+
+        .warning {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: #fcd34d;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 24px;
+            font-size: 12px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .warning svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(139, 92, 246, 0.2);
+            border-top-color: #8b5cf6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading p {
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px;
+            text-align: center;
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(138, 43, 226, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+        }
+
+        .footer p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .footer strong {
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- CUSTOM TITLEBAR -->
+    <div class="titlebar">
+        <div class="titlebar-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>Lisans Aktivasyonu</span>
+        </div>
+        <div class="titlebar-controls">
+            <button class="titlebar-button minimize" id="minimizeBtn" title="Küçült">
+                <span>─</span>
+            </button>
+            <button class="titlebar-button close" id="closeBtn" title="Kapat">
+                <span>×</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="stars" id="stars"></div>
+    
+    <div class="container" id="licenseForm">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M9 12l2 2 4-4"/>
+                </svg>
+            </div>
+            <h1>🔒 Lisans Aktivasyonu</h1>
+            <p class="subtitle">Uygulamayı kullanabilmek için lisans anahtarınızı girin</p>
+        </div>
+
+        <!-- COUNTDOWN TIMER -->
+        <div class="timer-container">
+            <div class="timer-label">⏱️ Kalan Süre</div>
+            <div class="timer-display" id="timerDisplay">03:30</div>
+            <div class="timer-warning">
+                <svg viewBox="0 0 24 24" style="width:12px;height:12px">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="currentColor" fill="none"/>
+                    <path d="M12 9v4M12 17h.01" stroke="currentColor" fill="none"/>
+                </svg>
+                Süre dolduğunda uygulama otomatik kapanacak
+            </div>
+        </div>
+
+        <div class="error" id="errorMessage"></div>
+
+        <form id="activationForm">
+            <div class="form-group">
+                <label for="licenseKey">📝 Lisans Anahtarı</label>
+                <input 
+                    type="text" 
+                    id="licenseKey" 
+                    placeholder="XXXX-XXXX-XXXX-XXXX" 
+                    autocomplete="off"
+                    spellcheck="false"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn">
+                <span>🔓 Aktivasyon Yap</span>
+            </button>
+
+            <div class="attempts" id="attemptsInfo"></div>
+
+            <div class="warning">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                    <path d="M12 9v4M12 17h.01"/>
+                </svg>
+                <span>⚠️ 3 başarısız denemeden sonra uygulama güvenlik nedeniyle sonlandırılacaktır</span>
+            </div>
+        </form>
+    </div>
+
+    <div class="loading" id="loadingState">
+        <div class="spinner"></div>
+        <p>🔄 Lisans doğrulanıyor...</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>© 2025-26 <strong>Berat Cankır</strong> - Tüm Hakları Saklıdır</p>
+    </div>
+
+    <script>
+        // TITLEBAR CONTROLS
+        document.getElementById('minimizeBtn').addEventListener('click', () => {
+            window.electron.minimizeLicenseWindow();
+        });
+
+        document.getElementById('closeBtn').addEventListener('click', () => {
+            if (confirm('Lisans aktivasyonu yapılmadan uygulamadan çıkmak istediğinize emin misiniz?\n\nUygulamayı kullanabilmek için geçerli bir lisans anahtarı girmeniz gerekir.')) {
+                window.electron.closeLicenseWindow();
+            }
+        });
+
+        // Yıldızları oluştur
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // COUNTDOWN TIMER - 3 dakika 30 saniye (210 saniye)
+        const TIMEOUT_SECONDS = 210; // 3dk 30sn
+        let remainingSeconds = TIMEOUT_SECONDS;
+        const timerDisplay = document.getElementById('timerDisplay');
+
+        function updateTimer() {
+            const minutes = Math.floor(remainingSeconds / 60);
+            const seconds = remainingSeconds % 60;
+            timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            
+            // Renk değişimi - son 30 saniyede kırmızı yanıp sönme
+            if (remainingSeconds <= 30) {
+                timerDisplay.style.color = '#dc2626';
+                timerDisplay.style.animation = 'timerPulse 0.5s ease-in-out infinite';
+            } else if (remainingSeconds <= 60) {
+                timerDisplay.style.color = '#f97316';
+            }
+            
+            remainingSeconds--;
+            
+            if (remainingSeconds < 0) {
+                clearInterval(countdownInterval);
+                showError('⏰ Süre doldu! Uygulama güvenlik nedeniyle kapatılıyor...');
+                document.getElementById('submitBtn').disabled = true;
+                document.getElementById('licenseKey').disabled = true;
+                
+                setTimeout(() => {
+                    window.electron.selfDestruct('Lisans aktivasyon süresi doldu (3dk 30sn)');
+                }, 2000);
+            }
+        }
+
+        const countdownInterval = setInterval(updateTimer, 1000);
+
+        let attempts = 0;
+        const MAX_ATTEMPTS = 3;
+
+        const form = document.getElementById('activationForm');
+        const input = document.getElementById('licenseKey');
+        const errorDiv = document.getElementById('errorMessage');
+        const attemptsInfo = document.getElementById('attemptsInfo');
+        const submitBtn = document.getElementById('submitBtn');
+        const licenseFormDiv = document.getElementById('licenseForm');
+        const loadingDiv = document.getElementById('loadingState');
+
+        // Lisans anahtarı formatını otomatik düzenle
+        input.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/[^A-Z0-9]/gi, '').toUpperCase();
+            const chunks = value.match(/.{1,4}/g) || [];
+            e.target.value = chunks.join('-');
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const licenseKey = input.value.trim();
+            
+            if (!licenseKey) {
+                showError('⚠️ Lütfen lisans anahtarını girin');
+                return;
+            }
+
+            // Loading durumunu göster
+            licenseFormDiv.style.display = 'none';
+            loadingDiv.style.display = 'block';
+
+            try {
+                // IPC ile main process'e gönder
+                const result = await window.electron.verifyLicense(licenseKey);
+                
+                if (result.success) {
+                    clearInterval(countdownInterval);
+                    errorDiv.classList.remove('show');
+                    submitBtn.innerHTML = '<span>✅ Lisans Onaylandı! Uygulama açılıyor...</span>';
+                    submitBtn.disabled = true;
+                    timerDisplay.textContent = '✓ BAŞARILI';
+                    timerDisplay.style.color = '#10b981';
+                    
+                    // ✅ DÜZELTME: 2 saniye bekle ve direkt ana ekranı aç (name modalı yok artık)
+                    setTimeout(() => {
+                        window.electron.closeLicenseModal();
+                    }, 2000);
+                } else {
+                    licenseFormDiv.style.display = 'block';
+                    loadingDiv.style.display = 'none';
+                    
+                    // TEK KULLANIM REDDEDILDI - Ozel mesaj ve hemen kapat
+                    if (result.singleUseRejected) {
+                        clearInterval(countdownInterval);
+                        showError('TEK KULLANIMLIK LISANS REDDEDILDI!\n\nBu lisans daha once baska bir bilgisayarda kullanilmis.\n\nOrijinal PC: ' + (result.originalMachine || 'Bilinmiyor') + '\nAktivasyon: ' + (result.activatedAt || 'Bilinmiyor'));
+                        submitBtn.disabled = true;
+                        input.disabled = true;
+                        timerDisplay.textContent = 'REDDEDILDI';
+                        timerDisplay.style.color = '#dc2626';
+                        
+                        setTimeout(() => {
+                            window.electron.selfDestruct('Tek kullanimlik lisans baska PC\'de kullanilmis');
+                        }, 5000);
+                        return;
+                    }
+                    
+                    // SUNUCU HATASI - Kullanici tekrar deneyebilir (deneme hakki azaltma)
+                    if (result.serverError) {
+                        showError('SUNUCU BAGLANTI HATASI\n\n' + (result.message || 'Lisans sunucusuna ulasilamiyor.') + '\n\nLutfen internet baglantinizi kontrol edin ve tekrar deneyin.');
+                        attemptsInfo.textContent = 'Internet baglantinizi kontrol edin';
+                        input.focus();
+                        return;
+                    }
+                    
+                    attempts++;
+                    const remaining = MAX_ATTEMPTS - attempts;
+                    
+                    if (attempts >= MAX_ATTEMPTS) {
+                        clearInterval(countdownInterval);
+                        showError('Maksimum deneme sayisina ulasildi. Guvenlik nedeniyle uygulama sonlandiriliyor...');
+                        submitBtn.disabled = true;
+                        input.disabled = true;
+                        
+                        setTimeout(() => {
+                            window.electron.selfDestruct('3 basarisiz lisans aktivasyon denemesi');
+                        }, 3000);
+                    } else {
+                        showError((result.message || 'Gecersiz lisans anahtari'));
+                        attemptsInfo.textContent = 'Kalan deneme hakki: ' + remaining;
+                        input.value = '';
+                        input.focus();
+                    }
+                }
+            } catch (error) {
+                attempts++;
+                const remaining = MAX_ATTEMPTS - attempts;
+                
+                licenseFormDiv.style.display = 'block';
+                loadingDiv.style.display = 'none';
+                
+                if (attempts >= MAX_ATTEMPTS) {
+                    clearInterval(countdownInterval);
+                    showError('❌ Maksimum deneme sayısına ulaşıldı. Uygulama sonlandırılıyor...');
+                    submitBtn.disabled = true;
+                    input.disabled = true;
+                    
+                    setTimeout(() => {
+                        window.electron.selfDestruct('3 başarısız lisans aktivasyon denemesi');
+                    }, 3000);
+                } else {
+                    showError('⚠️ Lisans doğrulanamadı. Lütfen tekrar deneyin.');
+                    attemptsInfo.textContent = `⚠️ Kalan deneme hakkı: ${remaining}`;
+                    input.value = '';
+                    input.focus();
+                }
+            }
+        });
+
+        function showError(message) {
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+        }
+
+        // Enter tuşuna basıldığında formu gönder
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                form.dispatchEvent(new Event('submit'));
+            }
+        });
+
+        // Sayfa yüklendiğinde input'a odaklan
+        window.addEventListener('load', () => {
+            input.focus();
+        });
+    </script>
+</body>
+</html>

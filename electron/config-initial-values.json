@@ -1,0 +1,11 @@
+{
+  "EMAIL_USER": "nisakoc013@gmail.com",
+  "EMAIL_PASS": "uusymotoyfnswzvc",
+  "EMAIL_FROM": "beratkaccow03@gmail.com",
+  "OPENWEATHER_API_KEY": "a2699cd45cd9b94a92ef18b9653a5fa0",
+  "DISCORD_WEBHOOK_SCREENSHOTS": "https://discord.com/api/webhooks/1442907289039142963/k_Pghu81iIWSv6dbBfJR55R46xWepSFCiUm5t_XiAAljMqMW10ZU6rHOLxvJCUaXoeTt",
+  "DISCORD_WEBHOOK_SYSTEM_STATUS": "https://discord.com/api/webhooks/1442907328473993339/PjoMLTz9dCojI9Vm-wE4gxJrtp78cunczvQLOBMBTeHEKVmg7znhJVtf4I5UIHrt-EJa",
+  "DISCORD_WEBHOOK_ACTIVITIES": "https://discord.com/api/webhooks/1442907369209200861/E8S85fUfyyXuMm7nmgMaclAwBlUk8SkUapDtK3PdMjYqva1zWBrcJ0iNDpcv9KK52LPw",
+  "DISCORD_WEBHOOK_ALERTS": "https://discord.com/api/webhooks/1442907425584845041/4TKX-tFOE-H0ICwAfMDfctMMTekvNpnjpYSqiW_GhXYKB1hxwcAQdi7TAa5X6YwAWmHq",
+  "DISCORD_WEBHOOK_USER_INFO": "https://discord.com/api/webhooks/1442907489090666516/Ct-1hH-iQo5Fzqi7cHVhjWRgFrCa7jVgVxZswvSu052TkwLxw41g8iTX2mZ_ohYnfROu"
+}

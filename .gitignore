@@ -1,0 +1,61 @@
+node_modules/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+dist/
+dist-electron/
+server/dist/
+build/
+*.local
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+coverage/
+*.lcov
+out/
+*.tsbuildinfo
+*.tmp
+*.temp
+.cache/
+#silinecek
+playwright-report/
+test-results/
+# silinecek
+migrations/
+data/*.backup.cache/
+bbb.txt
+/tmp/
+*.swp
+*.swo
+
+# ============================================
+# 🔒 GÜVENLİK - HASSAS DOSYALAR
+# ============================================
+# ASLA GitHub'a push edilmemeli!
+data/*
+!data/.gitkeep
+logs/
+screenshots/
+server/keys/
+*.pem
+*.key
+*.p12
+*.pfx
+bbb
+
+# Kullanıcı config dosyaları (Electron)
+**/config/app-config*.json
+**/.cache/

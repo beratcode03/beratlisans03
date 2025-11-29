@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kullanıcı Bilgileri</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .modal-container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 500px;
+      padding: 40px;
+      position: relative;
+      animation: slideIn 0.4s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .icon svg {
+      width: 40px;
+      height: 40px;
+      fill: white;
+    }
+
+    h1 {
+      color: #2d3748;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #718096;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      color: #4a5568;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #2d3748;
+      background: white;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    input::placeholder {
+      color: #a0aec0;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .error-message {
+      color: #e53e3e;
+      font-size: 13px;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      color: #a0aec0;
+      font-size: 12px;
+    }
+
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      animation: float 15s infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+  
+  <div class="modal-container">
+    <div class="header">
+      <div class="icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+      </div>
+      <h1>Hoş Geldiniz!</h1>
+      <p class="subtitle">Lütfen adınızı ve soyadınızı girerek devam edin</p>
+    </div>
+
+    <form id="nameForm">
+      <div class="form-group">
+        <label for="firstName">Ad</label>
+        <input 
+          type="text" 
+          id="firstName" 
+          placeholder="Adınızı girin"
+          autocomplete="given-name"
+          required
+        >
+        <div class="error-message" id="firstNameError">Lütfen adınızı girin</div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Soyad</label>
+        <input 
+          type="text" 
+          id="lastName" 
+          placeholder="Soyadınızı girin"
+          autocomplete="family-name"
+          required
+        >
+        <div class="error-message" id="lastNameError">Lütfen soyadınızı girin</div>
+      </div>
+
+      <button type="submit" class="btn" id="submitBtn">
+        Devam Et
+      </button>
+    </form>
+
+    <div class="footer">
+      BERAT CANKIR YKS Analiz Takip Sistemi © 2025
+    </div>
+  </div>
+
+  <script>
+    // Parçacık efekti
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 15 + 's';
+      particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+      particlesContainer.appendChild(particle);
+    }
+
+    const form = document.getElementById('nameForm');
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+    const submitBtn = document.getElementById('submitBtn');
+    const firstNameError = document.getElementById('firstNameError');
+    const lastNameError = document.getElementById('lastNameError');
+
+    // Input validation
+    function validateInput(input, errorElement) {
+      const value = input.value.trim();
+      if (value.length === 0) {
+        errorElement.classList.add('show');
+        input.style.borderColor = '#e53e3e';
+        return false;
+      } else if (value.length < 2) {
+        errorElement.textContent = 'En az 2 karakter olmalıdır';
+        errorElement.classList.add('show');
+        input.style.borderColor = '#e53e3e';
+        return false;
+      } else if (!/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/.test(value)) {
+        errorElement.textContent = 'Sadece harf kullanabilirsiniz';
+        errorElement.classList.add('show');
+        input.style.borderColor = '#e53e3e';
+        return false;
+      } else {
+        errorElement.classList.remove('show');
+        input.style.borderColor = '#e2e8f0';
+        return true;
+      }
+    }
+
+    firstNameInput.addEventListener('input', () => {
+      if (firstNameInput.value.trim()) {
+        validateInput(firstNameInput, firstNameError);
+      }
+    });
+
+    lastNameInput.addEventListener('input', () => {
+      if (lastNameInput.value.trim()) {
+        validateInput(lastNameInput, lastNameError);
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const firstNameValid = validateInput(firstNameInput, firstNameError);
+      const lastNameValid = validateInput(lastNameInput, lastNameError);
+
+      if (!firstNameValid || !lastNameValid) {
+        return;
+      }
+
+      const firstName = firstNameInput.value.trim();
+      const lastName = lastNameInput.value.trim();
+      const fullName = `${firstName} ${lastName}`;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Kaydediliyor...';
+
+      try {
+        const result = await window.electron.saveUserFullname(fullName);
+        
+        if (result && result.success) {
+          submitBtn.textContent = '✓ Başarılı!';
+          setTimeout(() => {
+            window.electron.closeNameModal();
+          }, 500);
+        } else {
+          console.error('İsim kaydetme hatası:', result ? result.error : 'Bilinmeyen hata');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Devam Et';
+          alert('Bir hata oluştu: ' + (result && result.error ? result.error : 'Lütfen tekrar deneyin.'));
+        }
+      } catch (error) {
+        console.error('İsim kaydetme hatası:', error);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Devam Et';
+        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+      }
+    });
+
+    // Auto focus
+    firstNameInput.focus();
+  </script>
+</body>
+</html>

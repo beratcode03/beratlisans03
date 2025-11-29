@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisans Süresi Doldu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .background-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%);
+            animation: pulse 10s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 550px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .icon-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .icon-circle {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(255, 107, 107, 0.05));
+            border: 3px solid rgba(255, 107, 107, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(255, 107, 107, 0);
+            }
+        }
+
+        .icon {
+            font-size: 60px;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .message {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 16px;
+            line-height: 1.7;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .info-item {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-item .label {
+            font-weight: 600;
+            color: #ff6b6b;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 16px 60px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ee5a6f, #ff6b6b);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #ee5a6f;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <div class="container">
+        <div class="icon-container">
+            <div class="icon-circle">
+                <div class="icon">⏱️</div>
+            </div>
+        </div>
+
+        <h1>Lisansınızın Süresi Doldu</h1>
+        
+        <p class="message">
+            BERAT CANKIR YKS Analiz Takip Sistemi lisansınızın kullanım süresi sona ermiştir.
+            Devam etmek için lütfen lisansınızı yenileyin.
+        </p>
+
+        <div class="info-box">
+            <div class="info-item">
+                <span class="label">📅 Durum:</span>
+                <span id="license-status">Lisans Süresi Dolmuş</span>
+            </div>
+            <div class="info-item">
+                <span class="label">👤 Kullanıcı:</span>
+                <span id="customer-name">-</span>
+            </div>
+            <div class="info-item">
+                <span class="label">⏰ Bitiş Tarihi:</span>
+                <span id="expiry-date">-</span>
+            </div>
+        </div>
+
+        <p class="message">
+            Yeni lisans almak veya mevcut lisansınızı yenilemek için lütfen sistem yöneticinizle iletişime geçin.
+        </p>
+
+        <div class="button-group">
+            <button class="btn btn-primary" onclick="closeApp()">
+                KAPAT
+            </button>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Berat Cankır - Tüm Hakları Saklıdır</p>
+        </div>
+    </div>
+
+    <script>
+        // ✅ DÜZELTME: Kullanıcı adını ConfigManager'dan ve lisans verilerini de al
+        Promise.all([
+            window.electronAPI.getLicenseData(),
+            window.electronAPI.invoke('get-user-fullname')
+        ]).then(([licenseData, userFullName]) => {
+            // ✅ Önce kullanıcının girdiği ismi göster (ConfigManager'dan)
+            // Yoksa lisans sahibinin ismini göster
+            const displayName = userFullName || (licenseData ? licenseData.customerName : null) || 'Bilinmiyor';
+            document.getElementById('customer-name').textContent = displayName;
+            
+            if (licenseData && licenseData.expiresAt) {
+                const expiryDate = new Date(licenseData.expiresAt);
+                document.getElementById('expiry-date').textContent = expiryDate.toLocaleString('tr-TR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            } else {
+                document.getElementById('expiry-date').textContent = 'Belirtilmemiş';
+            }
+        }).catch(err => {
+            console.error('License data error:', err);
+            document.getElementById('customer-name').textContent = 'Yüklenemedi';
+            document.getElementById('expiry-date').textContent = 'Yüklenemedi';
+        });
+
+        function closeApp() {
+            window.electronAPI.send('close-app');
+        }
+
+        // Escape tuşu ile kapanmayı engelle
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
